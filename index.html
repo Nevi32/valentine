@@ -289,28 +289,6 @@
             opacity: 0.9;
         }
 
-        /* Sending notification indicator */
-        .notification-status {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--text-warm);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        .notification-status.show {
-            opacity: 1;
-        }
-
         /* Flying emojis animation */
         .flying-emoji {
             position: fixed;
@@ -387,9 +365,6 @@
     <!-- Floating Background Emojis -->
     <div class="floating-bg" id="floatingBg"></div>
 
-    <!-- Notification Status Toast -->
-    <div class="notification-status" id="notifStatus">Sending notification... 📱</div>
-
     <div class="container">
         <!-- Question View -->
         <div class="question-view" id="questionView">
@@ -448,10 +423,6 @@
     </div>
 
     <script>
-        // ntfy configuration - CHANGE THIS TO YOUR TOPIC
-        const NTFY_TOPIC = 'valentine';
-        const NTFY_SERVER = 'https://ntfy.sh';
-        
         // Create floating background emojis
         const bgEmojis = ['🍑', '💖', '✨', '🌸', '🧸', '💌', '🎈', '🌹', '💝', '🎀', '🐻', '💕'];
         const floatingBg = document.getElementById('floatingBg');
@@ -467,45 +438,7 @@
             floatingBg.appendChild(emoji);
         }
 
-        async function sendNtfyNotification() {
-            const statusEl = document.getElementById('notifStatus');
-            statusEl.textContent = 'Sending notification... 📱';
-            statusEl.classList.add('show');
-            
-            try {
-                const response = await fetch(`${NTFY_SERVER}/${NTFY_TOPIC}`, {
-                    method: 'POST',
-                    body: 'VAL just said YES to being your Valentine! 💝🎉 Time to celebrate!',
-                    headers: {
-                        'Title': 'She Said YES! 💍💖',
-                        'Priority': 'high',
-                        'Tags': 'partying_face,heart,tada,peach',
-                        'Click': window.location.href // Clicking notification opens this page
-                    }
-                });
-                
-                if (response.ok) {
-                    statusEl.textContent = 'Notification sent! 📨✅';
-                    setTimeout(() => {
-                        statusEl.classList.remove('show');
-                    }, 3000);
-                    console.log('✅ Notification sent to ntfy successfully');
-                } else {
-                    throw new Error('Failed to send notification');
-                }
-            } catch (error) {
-                console.error('❌ Failed to send ntfy notification:', error);
-                statusEl.textContent = 'Could not send notification, but she said yes! 💝';
-                setTimeout(() => {
-                    statusEl.classList.remove('show');
-                }, 3000);
-            }
-        }
-
         function celebrate() {
-            // Send notification first (don't wait for it to celebrate)
-            sendNtfyNotification();
-            
             // Switch views
             document.getElementById('questionView').style.display = 'none';
             document.getElementById('celebrationView').style.display = 'flex';
@@ -593,11 +526,6 @@
             }
             lastTouchEnd = now;
         }, false);
-        
-        // Check if we should show a notification banner on load (optional feature)
-        if ('serviceWorker' in navigator) {
-            console.log('📱 App capable of receiving notifications via ntfy');
-        }
     </script>
 </body>
 </html>
