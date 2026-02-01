@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For VAL 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --peach: #FFDAB9;
+            --light-peach: #FFF5EE;
+            --coral: #FFA07A;
+            --warm-orange: #FFCC99;
+            --cream: #FFF8F0;
+            --text-warm: #D2691E;
+            --soft-brown: #8B4513;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(180deg, #FFF8F0 0%, #FFE4E1 30%, #FFDAB9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Floating Emojis Background */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .float-emoji {
+            position: absolute;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            opacity: 0.4;
+            animation: drift 20s infinite ease-in-out;
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, -30px) rotate(10deg);
+            }
+            50% {
+                transform: translate(-10px, -60px) rotate(-5deg);
+            }
+            75% {
+                transform: translate(15px, -30px) rotate(5deg);
+            }
+        }
+
+        /* Main Content */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            max-width: 90vw;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Initial View */
+        .question-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .main-emoji {
+            font-size: clamp(4rem, 15vw, 8rem);
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 10px 20px rgba(255, 160, 122, 0.3));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: var(--text-warm);
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            text-shadow: 2px 2px 0px rgba(255, 218, 185, 0.5);
+        }
+
+        .name-highlight {
+            background: linear-gradient(135deg, #FF8C69, #FF6347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            position: relative;
+        }
+
+        .name-highlight::after {
+            content: '✨';
+            position: absolute;
+            right: -40px;
+            top: -10px;
+            font-size: 0.5em;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .subtitle {
+            color: var(--soft-brown);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            opacity: 0.8;
+            font-weight: 500;
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        /* Yes Button */
+        .yes-btn {
+            background: linear-gradient(135deg, #FFA07A, #FF8C69);
+            color: white;
+            border: none;
+            padding: clamp(20px, 6vw, 30px) clamp(60px, 12vw, 100px);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            border-radius: 100px;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 
+                0 20px 40px rgba(255, 140, 105, 0.4),
+                0 0 0 4px rgba(255, 255, 255, 0.5) inset;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            animation: pulse-btn 2s infinite;
+        }
+
+        @keyframes pulse-btn {
+            0%, 100% { box-shadow: 0 20px 40px rgba(255, 140, 105, 0.4), 0 0 0 4px rgba(255, 255, 255, 0.5) inset; }
+            50% { box-shadow: 0 25px 50px rgba(255, 140, 105, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.5) inset; }
+        }
+
+        .yes-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(135deg, #FF8C69, #FF6347);
+        }
+
+        .yes-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .yes-btn::before {
+            content: '💝';
+            margin-right: 10px;
+        }
+
+        .yes-btn::after {
+            content: '💝';
+            margin-left: 10px;
+        }
+
+        /* Celebration View */
+        .celebration-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            animation: celebrateIn 0.8s ease-out;
+        }
+
+        @keyframes celebrateIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .celebration-gif {
+            width: min(300px, 80vw);
+            height: min(300px, 80vw);
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(255, 140, 105, 0.3);
+            border: 8px solid white;
+            animation: rotateIn 1s ease-out;
+        }
+
+        @keyframes rotateIn {
+            from { transform: rotate(-10deg) scale(0.8); opacity: 0; }
+            to { transform: rotate(0) scale(1); opacity: 1; }
+        }
+
+        .success-text {
+            color: var(--text-warm);
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .emoji-row {
+            font-size: clamp(2rem, 6vw, 3rem);
+            letter-spacing: 10px;
+            animation: wiggle 2s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .message {
+            color: var(--soft-brown);
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+            max-width: 500px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Floating hearts animation for celebration */
+        .heart-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            font-size: 2rem;
+        }
+
+        @keyframes fly-up {
+            0% {
+                transform: translateY(0) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .yes-btn {
+                width: 90%;
+                max-width: 300px;
+            }
+        }
+
+        /* Disable text selection for better mobile experience */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Emojis -->
+    <div class="floating-bg" id="floatingBg"></div>
+
+    <div class="container">
+        <!-- Question View -->
+        <div class="question-view" id="questionView">
+            <div class="main-emoji">🧸💌</div>
+            
+            <div>
+                <h1>
+                    <span class="name-highlight">VAL</span>,<br>
+                    Will You Be<br>My Valentine?
+                </h1>
+            </div>
+            
+            <p class="subtitle">
+                You're the peach to my cream 🍑✨<br>
+                Say yes and make my day!
+            </p>
+
+            <button class="yes-btn" onclick="celebrate()">
+                YES!
+            </button>
+        </div>
+
+        <!-- Celebration View -->
+        <div class="celebration-view" id="celebrationView">
+            <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aTc4aXFrOWIzMDVkbmFocDJjMmc3cmxzdWN1cGsybW8wcTNkanZ2cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wPnbkEcr2tXiTN0Lmq/giphy.gif" 
+                 alt="Celebration" 
+                 class="celebration-gif">
+            
+            <div class="emoji-row">🎉💕🌹💖🎉</div>
+            
+            <h2 class="success-text">
+                YAY!<br>
+                I Love You VAL! 💝
+            </h2>
+            
+            <p class="message">
+                You just made me the happiest person alive!<br>
+                Can't wait to spend Valentine's with you 🥰<br>
+                <span style="font-size: 1.5em;">🍑💖🧸</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating background emojis
+        const bgEmojis = ['🍑', '💖', '✨', '🌸', '🧸', '💌', '🎈', '🌹', '💝', '🎀'];
+        const floatingBg = document.getElementById('floatingBg');
+        
+        for (let i = 0; i < 12; i++) {
+            const emoji = document.createElement('div');
+            emoji.className = 'float-emoji';
+            emoji.textContent = bgEmojis[Math.floor(Math.random() * bgEmojis.length)];
+            emoji.style.left = Math.random() * 90 + 5 + '%';
+            emoji.style.top = Math.random() * 90 + 5 + '%';
+            emoji.style.animationDelay = Math.random() * 20 + 's';
+            emoji.style.animationDuration = 15 + Math.random() * 10 + 's';
+            floatingBg.appendChild(emoji);
+        }
+
+        function celebrate() {
+            // Switch views
+            document.getElementById('questionView').style.display = 'none';
+            document.getElementById('celebrationView').style.display = 'flex';
+            
+            // Create heart burst
+            createHeartBurst();
+            
+            // Create floating emojis from bottom
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFlyingEmoji();
+                }, i * 100);
+            }
+        }
+
+        function createHeartBurst() {
+            const hearts = ['💖', '💕', '🌹', '🎉', '✨', '🍑', '🧸'];
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-burst';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = centerX + 'px';
+                heart.style.top = centerY + 'px';
+                
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 10 + Math.random() * 10;
+                const tx = Math.cos(angle) * velocity * 20;
+                const ty = Math.sin(angle) * velocity * 20 - 200;
+                
+                heart.style.animation = `fly-up ${1.5 + Math.random()}s ease-out forwards`;
+                heart.style.transform = `translate(${tx}px, ${ty}px)`;
+                
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        function createFlyingEmoji() {
+            const emojis = ['💖', '🍑', '✨', '🌹', '🧸', '💝', '🎉'];
+            const emoji = document.createElement('div');
+            emoji.className = 'heart-burst';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            emoji.style.bottom = '-50px';
+            emoji.style.animation = `fly-up ${2 + Math.random() * 2}s ease-out forwards`;
+            document.body.appendChild(emoji);
+            setTimeout(() => emoji.remove(), 4000);
+        }
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
